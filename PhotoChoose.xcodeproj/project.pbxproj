@@ -15,6 +15,8 @@
 		964077401D9386A700E3A980 /* SinglePhotoChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9640773F1D9386A700E3A980 /* SinglePhotoChooseViewController.m */; };
 		964077431D93889700E3A980 /* MultiPhotoChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 964077421D93889700E3A980 /* MultiPhotoChooseViewController.m */; };
 		964077471D9389CB00E3A980 /* MultiChooseImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 964077461D9389CB00E3A980 /* MultiChooseImagePicker.m */; };
+		966C64AA1D93A7BA00ED8A47 /* MultiPhotoCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 966C64A91D93A7BA00ED8A47 /* MultiPhotoCollectionCell.m */; };
+		966C64AD1D93AE3200ED8A47 /* MultiChooseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 966C64AC1D93AE3200ED8A47 /* MultiChooseCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,10 @@
 		964077421D93889700E3A980 /* MultiPhotoChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiPhotoChooseViewController.m; sourceTree = "<group>"; };
 		964077451D9389CB00E3A980 /* MultiChooseImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiChooseImagePicker.h; sourceTree = "<group>"; };
 		964077461D9389CB00E3A980 /* MultiChooseImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiChooseImagePicker.m; sourceTree = "<group>"; };
+		966C64A81D93A7BA00ED8A47 /* MultiPhotoCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiPhotoCollectionCell.h; sourceTree = "<group>"; };
+		966C64A91D93A7BA00ED8A47 /* MultiPhotoCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiPhotoCollectionCell.m; sourceTree = "<group>"; };
+		966C64AB1D93AE3200ED8A47 /* MultiChooseCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiChooseCollectionViewCell.h; sourceTree = "<group>"; };
+		966C64AC1D93AE3200ED8A47 /* MultiChooseCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiChooseCollectionViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +80,8 @@
 				9640773F1D9386A700E3A980 /* SinglePhotoChooseViewController.m */,
 				964077411D93889700E3A980 /* MultiPhotoChooseViewController.h */,
 				964077421D93889700E3A980 /* MultiPhotoChooseViewController.m */,
+				966C64A81D93A7BA00ED8A47 /* MultiPhotoCollectionCell.h */,
+				966C64A91D93A7BA00ED8A47 /* MultiPhotoCollectionCell.m */,
 				964077331D9384C500E3A980 /* Assets.xcassets */,
 				964077351D9384C500E3A980 /* LaunchScreen.storyboard */,
 				964077381D9384C500E3A980 /* Info.plist */,
@@ -95,6 +103,8 @@
 			children = (
 				964077451D9389CB00E3A980 /* MultiChooseImagePicker.h */,
 				964077461D9389CB00E3A980 /* MultiChooseImagePicker.m */,
+				966C64AB1D93AE3200ED8A47 /* MultiChooseCollectionViewCell.h */,
+				966C64AC1D93AE3200ED8A47 /* MultiChooseCollectionViewCell.m */,
 			);
 			path = MutiChooseImagePicker;
 			sourceTree = "<group>";
@@ -175,6 +185,8 @@
 				964077471D9389CB00E3A980 /* MultiChooseImagePicker.m in Sources */,
 				9640772F1D9384C500E3A980 /* ViewController.m in Sources */,
 				9640772C1D9384C500E3A980 /* AppDelegate.m in Sources */,
+				966C64AD1D93AE3200ED8A47 /* MultiChooseCollectionViewCell.m in Sources */,
+				966C64AA1D93A7BA00ED8A47 /* MultiPhotoCollectionCell.m in Sources */,
 				964077291D9384C500E3A980 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -324,6 +336,7 @@
 				9640773D1D9384C500E3A980 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

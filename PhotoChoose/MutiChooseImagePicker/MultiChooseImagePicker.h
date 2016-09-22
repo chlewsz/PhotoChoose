@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol MultiChooseImagePickerDelegate <NSObject>
+
+- (void)selectedFinish:(NSArray *)selectedArray;
+
+@end
+
 @interface MultiChooseImagePicker : UIViewController
+
+@property(nonatomic, weak)id<MultiChooseImagePickerDelegate> delegate;
 
 @end
