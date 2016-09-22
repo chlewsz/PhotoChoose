@@ -15,6 +15,7 @@
 #import "MultiPhotoChooseViewController.h"
 #import "MultiPhotoCollectionCell.h"
 #import "MultiChooseImagePicker.h"
+#import "PhotoBrowserViewController.h"
 
 @interface MultiPhotoChooseViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, MultiChooseImagePickerDelegate>
 
@@ -99,13 +100,18 @@
 #pragma mark -- UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"item == %d", (int)indexPath.item);
-    
     if (indexPath.item == self.selectedImgArray.count)
     {
         MultiChooseImagePicker *imagePicker = [MultiChooseImagePicker new];
         imagePicker.delegate = self;
         [self.navigationController pushViewController:imagePicker animated:YES];
+    }
+    else
+    {
+        PhotoBrowserViewController *controller = [PhotoBrowserViewController new];
+        controller.imageArray = self.selectedImgArray;
+        controller.currentIndex = (int)indexPath.item;
+        [self.navigationController pushViewController:controller animated:YES];
     }
 }
 

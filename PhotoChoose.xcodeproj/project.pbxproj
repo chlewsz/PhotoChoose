@@ -17,6 +17,8 @@
 		964077471D9389CB00E3A980 /* MultiChooseImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 964077461D9389CB00E3A980 /* MultiChooseImagePicker.m */; };
 		966C64AA1D93A7BA00ED8A47 /* MultiPhotoCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 966C64A91D93A7BA00ED8A47 /* MultiPhotoCollectionCell.m */; };
 		966C64AD1D93AE3200ED8A47 /* MultiChooseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 966C64AC1D93AE3200ED8A47 /* MultiChooseCollectionViewCell.m */; };
+		966C64B11D93C4EF00ED8A47 /* PhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 966C64B01D93C4EF00ED8A47 /* PhotoBrowserViewController.m */; };
+		966C64B41D93C5E800ED8A47 /* PhotoBrowserCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 966C64B31D93C5E800ED8A47 /* PhotoBrowserCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,11 @@
 		966C64A91D93A7BA00ED8A47 /* MultiPhotoCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiPhotoCollectionCell.m; sourceTree = "<group>"; };
 		966C64AB1D93AE3200ED8A47 /* MultiChooseCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiChooseCollectionViewCell.h; sourceTree = "<group>"; };
 		966C64AC1D93AE3200ED8A47 /* MultiChooseCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiChooseCollectionViewCell.m; sourceTree = "<group>"; };
+		966C64AF1D93C4EF00ED8A47 /* PhotoBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoBrowserViewController.h; sourceTree = "<group>"; };
+		966C64B01D93C4EF00ED8A47 /* PhotoBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoBrowserViewController.m; sourceTree = "<group>"; };
+		966C64B21D93C5E800ED8A47 /* PhotoBrowserCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoBrowserCollectionViewCell.h; sourceTree = "<group>"; };
+		966C64B31D93C5E800ED8A47 /* PhotoBrowserCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoBrowserCollectionViewCell.m; sourceTree = "<group>"; };
+		966C64B51D93CCB200ED8A47 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +78,7 @@
 		964077261D9384C500E3A980 /* PhotoChoose */ = {
 			isa = PBXGroup;
 			children = (
+				966C64AE1D93C49800ED8A47 /* PhotoBrowser */,
 				964077441D9389B800E3A980 /* MutiChooseImagePicker */,
 				9640772A1D9384C500E3A980 /* AppDelegate.h */,
 				9640772B1D9384C500E3A980 /* AppDelegate.m */,
@@ -107,6 +115,17 @@
 				966C64AC1D93AE3200ED8A47 /* MultiChooseCollectionViewCell.m */,
 			);
 			path = MutiChooseImagePicker;
+			sourceTree = "<group>";
+		};
+		966C64AE1D93C49800ED8A47 /* PhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				966C64AF1D93C4EF00ED8A47 /* PhotoBrowserViewController.h */,
+				966C64B01D93C4EF00ED8A47 /* PhotoBrowserViewController.m */,
+				966C64B21D93C5E800ED8A47 /* PhotoBrowserCollectionViewCell.h */,
+				966C64B31D93C5E800ED8A47 /* PhotoBrowserCollectionViewCell.m */,
+			);
+			path = PhotoBrowser;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,7 +169,6 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
 			);
 			mainGroup = 9640771B1D9384C500E3A980;
@@ -180,11 +198,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				966C64B41D93C5E800ED8A47 /* PhotoBrowserCollectionViewCell.m in Sources */,
 				964077401D9386A700E3A980 /* SinglePhotoChooseViewController.m in Sources */,
 				964077431D93889700E3A980 /* MultiPhotoChooseViewController.m in Sources */,
 				964077471D9389CB00E3A980 /* MultiChooseImagePicker.m in Sources */,
 				9640772F1D9384C500E3A980 /* ViewController.m in Sources */,
 				9640772C1D9384C500E3A980 /* AppDelegate.m in Sources */,
+				966C64B11D93C4EF00ED8A47 /* PhotoBrowserViewController.m in Sources */,
 				966C64AD1D93AE3200ED8A47 /* MultiChooseCollectionViewCell.m in Sources */,
 				966C64AA1D93A7BA00ED8A47 /* MultiPhotoCollectionCell.m in Sources */,
 				964077291D9384C500E3A980 /* main.m in Sources */,
@@ -198,6 +218,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				964077361D9384C500E3A980 /* Base */,
+				966C64B51D93CCB200ED8A47 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -209,6 +230,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -256,6 +278,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
