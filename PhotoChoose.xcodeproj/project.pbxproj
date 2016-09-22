@@ -10,9 +10,11 @@
 		964077291D9384C500E3A980 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 964077281D9384C500E3A980 /* main.m */; };
 		9640772C1D9384C500E3A980 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9640772B1D9384C500E3A980 /* AppDelegate.m */; };
 		9640772F1D9384C500E3A980 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9640772E1D9384C500E3A980 /* ViewController.m */; };
-		964077321D9384C500E3A980 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 964077301D9384C500E3A980 /* Main.storyboard */; };
 		964077341D9384C500E3A980 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 964077331D9384C500E3A980 /* Assets.xcassets */; };
 		964077371D9384C500E3A980 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 964077351D9384C500E3A980 /* LaunchScreen.storyboard */; };
+		964077401D9386A700E3A980 /* SinglePhotoChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9640773F1D9386A700E3A980 /* SinglePhotoChooseViewController.m */; };
+		964077431D93889700E3A980 /* MultiPhotoChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 964077421D93889700E3A980 /* MultiPhotoChooseViewController.m */; };
+		964077471D9389CB00E3A980 /* MultiChooseImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 964077461D9389CB00E3A980 /* MultiChooseImagePicker.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,10 +24,15 @@
 		9640772B1D9384C500E3A980 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9640772D1D9384C500E3A980 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		9640772E1D9384C500E3A980 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		964077311D9384C500E3A980 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		964077331D9384C500E3A980 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		964077361D9384C500E3A980 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		964077381D9384C500E3A980 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9640773E1D9386A700E3A980 /* SinglePhotoChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglePhotoChooseViewController.h; sourceTree = "<group>"; };
+		9640773F1D9386A700E3A980 /* SinglePhotoChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglePhotoChooseViewController.m; sourceTree = "<group>"; };
+		964077411D93889700E3A980 /* MultiPhotoChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiPhotoChooseViewController.h; sourceTree = "<group>"; };
+		964077421D93889700E3A980 /* MultiPhotoChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiPhotoChooseViewController.m; sourceTree = "<group>"; };
+		964077451D9389CB00E3A980 /* MultiChooseImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiChooseImagePicker.h; sourceTree = "<group>"; };
+		964077461D9389CB00E3A980 /* MultiChooseImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiChooseImagePicker.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,11 +65,15 @@
 		964077261D9384C500E3A980 /* PhotoChoose */ = {
 			isa = PBXGroup;
 			children = (
+				964077441D9389B800E3A980 /* MutiChooseImagePicker */,
 				9640772A1D9384C500E3A980 /* AppDelegate.h */,
 				9640772B1D9384C500E3A980 /* AppDelegate.m */,
 				9640772D1D9384C500E3A980 /* ViewController.h */,
 				9640772E1D9384C500E3A980 /* ViewController.m */,
-				964077301D9384C500E3A980 /* Main.storyboard */,
+				9640773E1D9386A700E3A980 /* SinglePhotoChooseViewController.h */,
+				9640773F1D9386A700E3A980 /* SinglePhotoChooseViewController.m */,
+				964077411D93889700E3A980 /* MultiPhotoChooseViewController.h */,
+				964077421D93889700E3A980 /* MultiPhotoChooseViewController.m */,
 				964077331D9384C500E3A980 /* Assets.xcassets */,
 				964077351D9384C500E3A980 /* LaunchScreen.storyboard */,
 				964077381D9384C500E3A980 /* Info.plist */,
@@ -77,6 +88,15 @@
 				964077281D9384C500E3A980 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		964077441D9389B800E3A980 /* MutiChooseImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				964077451D9389CB00E3A980 /* MultiChooseImagePicker.h */,
+				964077461D9389CB00E3A980 /* MultiChooseImagePicker.m */,
+			);
+			path = MutiChooseImagePicker;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -110,6 +130,7 @@
 				TargetAttributes = {
 					964077231D9384C500E3A980 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = T2J3Q63RS8;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -139,7 +160,6 @@
 			files = (
 				964077371D9384C500E3A980 /* LaunchScreen.storyboard in Resources */,
 				964077341D9384C500E3A980 /* Assets.xcassets in Resources */,
-				964077321D9384C500E3A980 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,6 +170,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				964077401D9386A700E3A980 /* SinglePhotoChooseViewController.m in Sources */,
+				964077431D93889700E3A980 /* MultiPhotoChooseViewController.m in Sources */,
+				964077471D9389CB00E3A980 /* MultiChooseImagePicker.m in Sources */,
 				9640772F1D9384C500E3A980 /* ViewController.m in Sources */,
 				9640772C1D9384C500E3A980 /* AppDelegate.m in Sources */,
 				964077291D9384C500E3A980 /* main.m in Sources */,
@@ -159,14 +182,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		964077301D9384C500E3A980 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				964077311D9384C500E3A980 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		964077351D9384C500E3A980 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -270,6 +285,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = T2J3Q63RS8;
 				INFOPLIST_FILE = PhotoChoose/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.heiguang.PhotoChoose;
@@ -281,6 +297,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = T2J3Q63RS8;
 				INFOPLIST_FILE = PhotoChoose/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.heiguang.PhotoChoose;
