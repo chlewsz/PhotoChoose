@@ -39,11 +39,12 @@
 
 @implementation MultiChooseImagePicker
 
-- (NSMutableArray *)imageArray
+- (NSMutableArray *)loadImageArray
 {
     if (_imageArray == nil)
     {
         _imageArray = [NSMutableArray new];
+       
         //列出所有相册智能相册
         //    PHFetchResult *albums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
         
@@ -158,12 +159,33 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UIBarButtonItem *confirmBar = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(confirmBtnClick)];
-    self.navigationItem.rightBarButtonItem = confirmBar;
+    //提前调用，触发系统授权
+    [self loadImageArray];
     
-    selectedArray = [NSMutableArray new];
-    
-    [self.view addSubview:self.collectionView];
+    //授权检查
+    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+    if (status == PHAuthorizationStatusRestricted || status == PHAuthorizationStatusDenied)
+    {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请在设置->隐私->照片中为本应用授权" preferredStyle:UIAlertControllerStyleAlert];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    else if (status == PHAuthorizationStatusNotDetermined)
+    {
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 64 + 10, SCREENWIDTH, 200)];
+        label.font = [UIFont systemFontOfSize:16.0f];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.text = @"允许授权后关闭页面重新打开";
+        [self.view addSubview:label];
+    }
+    else
+    {
+        UIBarButtonItem *confirmBar = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(confirmBtnClick)];
+        self.navigationItem.rightBarButtonItem = confirmBar;
+        
+        selectedArray = [NSMutableArray new];
+        
+        [self.view addSubview:self.collectionView];
+    }
 }
 
 #pragma mark -- 确定按钮点击
