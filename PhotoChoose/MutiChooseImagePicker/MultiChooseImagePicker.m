@@ -30,6 +30,8 @@
 @interface MultiChooseImagePicker ()<UICollectionViewDataSource, UICollectionViewDelegate, MultiChooseCollectionViewCellDelagte>
 {
     NSMutableArray *selectedArray;
+    
+    NSTimer *timer;
 }
 
 @property(nonatomic, strong)NSMutableArray *imageArray;
@@ -41,35 +43,32 @@
 
 - (NSMutableArray *)loadImageArray
 {
-    if (_imageArray == nil)
-    {
-        _imageArray = [NSMutableArray new];
+    _imageArray = [NSMutableArray new];
        
-        //列出所有相册智能相册
-        //    PHFetchResult *albums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
+    //列出所有相册智能相册
+    //    PHFetchResult *albums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
+    
+    //列出所有用户创建的相册
+    //    PHFetchResult *topLevelUserCollections = [PHAssetCollection fetchTopLevelUserCollectionsWithOptions:nil];
+    
+    //获取所有资源的集合，并按照资源的创建时间排序
+    PHFetchOptions *options = [PHFetchOptions new];
+    options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
+    PHFetchResult *assetsFetchResults = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:options];
+    
+    //在资源的集合中获取第一个集合，并获取其中的图片
+    PHImageManager *imageManager = [PHImageManager defaultManager];
+    
+    PHImageRequestOptions *requestOptions = [PHImageRequestOptions new];
+    requestOptions.synchronous = YES;
+    
+    for (PHAsset *asset in assetsFetchResults)
+    {
+        CGSize size = CGSizeMake(asset.pixelWidth, asset.pixelHeight);
         
-        //列出所有用户创建的相册
-        //    PHFetchResult *topLevelUserCollections = [PHAssetCollection fetchTopLevelUserCollectionsWithOptions:nil];
-        
-        //获取所有资源的集合，并按照资源的创建时间排序
-        PHFetchOptions *options = [PHFetchOptions new];
-        options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
-        PHFetchResult *assetsFetchResults = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:options];
-        
-        //在资源的集合中获取第一个集合，并获取其中的图片
-        PHImageManager *imageManager = [PHImageManager defaultManager];
-        
-        PHImageRequestOptions *requestOptions = [PHImageRequestOptions new];
-        requestOptions.synchronous = YES;
-        
-        for (PHAsset *asset in assetsFetchResults)
-        {
-            CGSize size = CGSizeMake(asset.pixelWidth, asset.pixelHeight);
-            
-            [imageManager requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFit options:requestOptions resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-                [_imageArray addObject:result];
-            }];
-        }
+        [imageManager requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFit options:requestOptions resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+            [_imageArray addObject:result];
+        }];
     }
     return _imageArray;
 }
@@ -167,6 +166,10 @@
     if (status == PHAuthorizationStatusRestricted || status == PHAuthorizationStatusDenied)
     {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请在设置->隐私->照片中为本应用授权" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alert addAction:cancelAction];
         [self presentViewController:alert animated:YES completion:nil];
     }
     else if (status == PHAuthorizationStatusNotDetermined)
@@ -174,8 +177,10 @@
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 64 + 10, SCREENWIDTH, 200)];
         label.font = [UIFont systemFontOfSize:16.0f];
         label.textAlignment = NSTextAlignmentCenter;
-        label.text = @"允许授权后关闭页面重新打开";
+        label.text = @"请允许授权后查看图片";
         [self.view addSubview:label];
+        
+        timer = [NSTimer scheduledTimerWithTimeInterval:0.2f target:self selector:@selector(observeAuthorizationStatusChange) userInfo:nil repeats:YES];
     }
     else
     {
@@ -183,6 +188,25 @@
         self.navigationItem.rightBarButtonItem = confirmBar;
         
         selectedArray = [NSMutableArray new];
+        
+        [self.view addSubview:self.collectionView];
+    }
+}
+
+#pragma mark -- 未选择授权时监控授权变化
+- (void)observeAuthorizationStatusChange
+{
+    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+    if (status == PHAuthorizationStatusAuthorized)
+    {
+        [timer invalidate];
+        [self.view.subviews.lastObject removeFromSuperview];
+        UIBarButtonItem *confirmBar = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(confirmBtnClick)];
+        self.navigationItem.rightBarButtonItem = confirmBar;
+        
+        selectedArray = [NSMutableArray new];
+        
+        [self loadImageArray];
         
         [self.view addSubview:self.collectionView];
     }

@@ -7,6 +7,7 @@
 //
 
 #import "SinglePhotoChooseViewController.h"
+#import <Photos/Photos.h>
 
 @interface SinglePhotoChooseViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -95,18 +96,48 @@
     
     if (0 == tag)
     {
-        _imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+        if (status == AVAuthorizationStatusDenied || status == AVAuthorizationStatusRestricted)
+        {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请在设置->隐私->相机中为本应用授权" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [alert dismissViewControllerAnimated:YES completion:nil];
+            }];
+            [alert addAction:cancelAction];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+        else
+        {
+            _imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+            [self presentViewController:_imagePickerController animated:YES completion:nil];
+        }
     }
-    else if (1 == tag)
+    else
     {
-        _imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        //授权检查
+        PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+        if (status == PHAuthorizationStatusRestricted || status == PHAuthorizationStatusDenied)
+        {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请在设置->隐私->照片中为本应用授权" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [alert dismissViewControllerAnimated:YES completion:nil];
+            }];
+            [alert addAction:cancelAction];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+        else
+        {
+            if (1 == tag)
+            {
+                _imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            }
+            else if (2 == tag)
+            {
+                _imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            }
+            [self presentViewController:_imagePickerController animated:YES completion:nil];
+        }
     }
-    else if (2 == tag)
-    {
-        _imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-    }
-    
-    [self presentViewController:_imagePickerController animated:YES completion:nil];
 }
 
 #pragma mark -- UIImagePickerControllerDelegate
