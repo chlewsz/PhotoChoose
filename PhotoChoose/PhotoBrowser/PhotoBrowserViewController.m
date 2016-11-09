@@ -13,8 +13,16 @@
 
 #import "PhotoBrowserViewController.h"
 #import "PhotoBrowserCollectionViewCell.h"
+#import <Photos/Photos.h>
 
 @interface PhotoBrowserViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, PhotoBrowserCollectionViewCellDelegate>
+{
+    int imageArrayType;//数组类型，0：图片，1：PHAsset数组
+    
+    
+    PHImageManager *imageManager;
+    PHImageRequestOptions *requestOptions;
+}
 
 @property(nonatomic, strong)UICollectionView *collectionView;
 @property(nonatomic, assign)BOOL hiddenContent;
@@ -22,6 +30,23 @@
 @end
 
 @implementation PhotoBrowserViewController
+
+- (void)setImageArray:(NSArray *)imageArray
+{
+    _imageArray = imageArray;
+    NSObject *object = _imageArray[0];
+    if ([object isKindOfClass:[UIImage class]])
+    {
+        imageArrayType = 0;
+    }
+    else if ([object isKindOfClass:[PHAsset class]])
+    {
+        imageArrayType = 1;
+        imageManager = [PHImageManager defaultManager];
+        requestOptions = [PHImageRequestOptions new];
+        requestOptions.synchronous = YES;//设置同步获取
+    }
+}
 
 - (UICollectionView *)collectionView
 {
@@ -91,7 +116,22 @@
     }
     
     cell.delegate = self;
-    cell.image = _imageArray[indexPath.item];
+    
+    if (0 == imageArrayType)
+    {
+        cell.image = _imageArray[indexPath.item];
+    }
+    else if (1 == imageArrayType)
+    {
+        PHAsset *asset = _imageArray[indexPath.item];
+        
+        CGSize size = CGSizeMake(asset.pixelWidth, asset.pixelHeight);
+        
+        [imageManager requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFit options:requestOptions resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+            cell.image = result;
+        }];
+    }
+    
     
     return cell;
 }

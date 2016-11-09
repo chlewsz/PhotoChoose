@@ -32,9 +32,12 @@
     NSMutableArray *selectedArray;
     
     NSTimer *timer;
+    
+    PHImageManager *imageManager;
+    PHImageRequestOptions *requestOptions;
 }
 
-@property(nonatomic, strong)NSMutableArray *imageArray;
+@property(nonatomic, strong)NSMutableArray *imageAssetsArray;
 @property(nonatomic, strong)UICollectionView *collectionView;
 
 @end
@@ -43,7 +46,7 @@
 
 - (NSMutableArray *)loadImageArray
 {
-    _imageArray = [NSMutableArray new];
+    _imageAssetsArray = [NSMutableArray new];
        
     //列出所有相册智能相册
     //    PHFetchResult *albums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
@@ -56,21 +59,11 @@
     options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
     PHFetchResult *assetsFetchResults = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:options];
     
-    //在资源的集合中获取第一个集合，并获取其中的图片
-    PHImageManager *imageManager = [PHImageManager defaultManager];
-    
-    PHImageRequestOptions *requestOptions = [PHImageRequestOptions new];
-    requestOptions.synchronous = YES;
-    
     for (PHAsset *asset in assetsFetchResults)
     {
-        CGSize size = CGSizeMake(asset.pixelWidth, asset.pixelHeight);
-        
-        [imageManager requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFit options:requestOptions resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-            [_imageArray addObject:result];
-        }];
+        [_imageAssetsArray addObject:asset];
     }
-    return _imageArray;
+    return _imageAssetsArray;
 }
 
 - (UICollectionView *)collectionView
@@ -99,7 +92,7 @@
 #pragma mark -- UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.imageArray.count;
+    return self.imageAssetsArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -108,8 +101,13 @@
 
     cell.delegate = self;
     
-    UIImage *image = self.imageArray[indexPath.item];
-    cell.image = image;
+    PHAsset *asset = self.imageAssetsArray[indexPath.row];
+    
+    CGSize size = CGSizeMake(asset.pixelWidth, asset.pixelHeight);
+    
+    [imageManager requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFit options:requestOptions resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+        cell.image = result;
+    }];
     
     return cell;
 }
@@ -118,7 +116,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     PhotoBrowserViewController *controller = [PhotoBrowserViewController new];
-    controller.imageArray = self.imageArray;
+    controller.imageArray = self.imageAssetsArray;
     controller.currentIndex = (int)indexPath.item;
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -157,6 +155,11 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    imageManager = [PHImageManager defaultManager];
+    requestOptions = [PHImageRequestOptions new];
+    requestOptions.synchronous = YES;//设置同步获取
+    
     
     //提前调用，触发系统授权
     [self loadImageArray];
